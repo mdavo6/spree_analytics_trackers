@@ -18,4 +18,15 @@ Spree::FrontendHelper.class_eval do
       end
     end.merge(optional).to_json.html_safe
   end
+
+  def product_for_google(product, optional = {})
+    {
+      id: product.id,
+      name: product.name,
+      category: product.category.try(:name),
+      brand: product.brand.try(:name),
+      price: product.price_in(current_currency).amount.to_f
+    }.tap do |hash|
+    end.merge(optional).to_json.html_safe
+  end
 end
