@@ -1,0 +1,11 @@
+<% if tracker = Spree::Tracker.current(:google_analytics) %>
+  <script>
+      if (typeof ga !== 'undefined') {
+        ga('ec:addProduct',
+          <%= product_for_google(@product) %>
+        );
+
+        ga('ec:setAction', 'detail');
+      }
+  </script>
+<% end %>

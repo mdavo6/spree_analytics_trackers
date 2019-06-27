@@ -1,9 +1,0 @@
-<script>
-  ga('ec:addImpression', {
-      'id': '<%= @product.id %>',
-      'name': '<%= @product.name %>',
-      'category': '<%= @product.category.try(:name) %>',
-      'brand': '<%= @product.brand.try(:name) %>',
-      'price': '<%= @product.price_in(current_currency).amount.to_f %>'
-  });
-</script>
