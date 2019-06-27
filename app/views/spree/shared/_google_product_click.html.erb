@@ -1,8 +1,8 @@
-<% if tracker = Spree::Tracker.current(:google_analytics) %>
-  <script>
+<script>
     if (typeof ga !== 'undefined') {
       <% products.each_with_index do |product, index| %>
-        function onProductClick() {
+        $('#<%= product.slug %>-link').click(function (event) {
+          event.preventDefault();
           ga('ec:addProduct',
             <%= product_for_google(product, position: index+1) %>
           );
@@ -15,5 +15,4 @@
         };
       <% end %>
     }
-  </script>
-<% end %>
+</script>
