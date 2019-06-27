@@ -1,0 +1,19 @@
+<% if tracker = Spree::Tracker.current(:google_analytics) %>
+  <script>
+    if (typeof ga !== 'undefined') {
+      <% products.each_with_index do |product, index| %>
+        function onProductClick() {
+          ga('ec:addProduct',
+            <%= product_for_google(product, position: index+1) %>
+          );
+          ga('ec:setAction', 'click', { list: '<%= @taxon.name %>'});
+          ga('send', 'event', 'UX', 'click', 'Results', {
+            hitCallback: function() {
+              Turbolinks.visit('<%= product_url(product, taxon_id: @taxon.try(:id)) %>');
+            }
+          });
+        };
+      <% end %>
+    }
+  </script>
+<% end %>
