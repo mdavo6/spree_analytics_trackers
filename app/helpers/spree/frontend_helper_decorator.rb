@@ -6,7 +6,7 @@ Spree::FrontendHelper.class_eval do
       category: product.category.try(:name),
       name: product.name,
       brand: product.brand.try(:name),
-      price: product.price_in(current_currency).amount.to_f,
+      price: product.price,
       currency: current_currency,
       url: product_url(product),
     }.tap do |hash|
