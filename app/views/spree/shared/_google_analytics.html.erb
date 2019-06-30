@@ -13,6 +13,7 @@
 
     ga('require', 'displayfeatures');
     ga('require', 'ec');
+    ga('set', 'currencyCode', '<%= current_currency %>');
 
     document.addEventListener("turbolinks:load", function(event) {
       if (typeof ga !== "undefined") {

@@ -21,7 +21,7 @@ Spree::FrontendHelper.class_eval do
 
   def product_for_google(product, optional = {})
     {
-      id: product.id,
+      id: product.sku,
       name: product.name,
       category: product.category.try(:name),
       brand: product.brand.try(:name),

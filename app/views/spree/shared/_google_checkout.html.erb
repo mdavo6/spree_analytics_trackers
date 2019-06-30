@@ -1,8 +1,6 @@
 <%# more info: https://developers.google.com/analytics/devguides/collection/analyticsjs/enhanced-ecommerce %>
 <script>
   if (typeof ga !== 'undefined') {
-    ga('set', '&cu', '<%= current_currency %>');
-
     <%= render partial: 'spree/shared/google_add_items', locals: { order: @order } %>
 
     // Add the step number and additional info about the checkout to the action.
