@@ -1,13 +1,13 @@
 <script>
   $('form#populate_order').on('ajax:beforeSend', function(e) {
-    if ($(this)).data('ajaxSubmitted') == true) {
+    if $(this).data('ajaxSubmitted') == true) {
       // Previously submitted, don't submit again
       return false
     }
     else {
       // Mark it so that the next submit gets ignored
-      ($(this)).data('ajaxSubmitted', true);
-      ($(this)).find(':submit, :image').removeClass('primary').addClass('disabled');
+      $(this).data('ajaxSubmitted', true);
+      $(this).find(':submit, :image').removeClass('primary').addClass('disabled');
       if (typeof ga !== 'undefined') {
         product_data = <%= product_for_google(@product) %>;
         product_data["quantity"] = $('input#quantity').val();
