@@ -12,7 +12,13 @@
     <% end %>
 
     ga('require', 'displayfeatures');
-    <%= yield :google_analytics %>
-    ga('send', 'pageview');
+    ga('require', 'ec');
+
+    document.addEventListener("turbolinks:load", function(event) {
+      if (typeof ga !== "undefined") {
+        ga("set", "location", event.data.url);
+        ga("send", "pageview");
+      }
+    });
   </script>
 <% end %>
