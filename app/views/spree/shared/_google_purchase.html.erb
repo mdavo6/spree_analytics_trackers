@@ -1,8 +1,6 @@
 <% if order_just_completed?(@order) %>
   <script>
-  <%# more info: https://developers.google.com/analytics/devguides/collection/analyticsjs/enhanced-ecommerce %>
   if (typeof ga !== 'undefined') {
-    ga('require', 'ec');
     ga('set', '&cu', '<%= current_currency %>');
 
     <%= render partial: 'spree/shared/google_add_items', locals: { order: @order } %>
