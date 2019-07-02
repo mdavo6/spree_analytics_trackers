@@ -1,0 +1,8 @@
+<% if tracker = Spree::Tracker.current(:google_analytics) %>
+  document.addEventListener("turbolinks:load", function(event) {
+    if (typeof ga !== "undefined") {
+      ga("set", "location", event.data.url);
+      ga("send", "pageview");
+    }
+  });
+<% end %>

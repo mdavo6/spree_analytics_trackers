@@ -15,11 +15,5 @@
     ga('require', 'ec');
     ga('set', 'currencyCode', '<%= current_currency %>');
 
-    document.addEventListener("turbolinks:load", function(event) {
-      if (typeof ga !== "undefined") {
-        ga("set", "location", event.data.url);
-        ga("send", "pageview");
-      }
-    });
   </script>
 <% end %>
