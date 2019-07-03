@@ -1,7 +1,8 @@
 <script>
     if (typeof ga !== 'undefined') {
       <% products.each_with_index do |product, index| %>
-        $('#<%= product.slug %>-link').click(function (event) {
+        var productLink = document.getElementById('<%= product.slug %>-link');
+        productLink.addEventListener('click', function (event) {
           event.preventDefault();
           ga('ec:addProduct',
             <%= product_for_google(product, position: index+1) %>
