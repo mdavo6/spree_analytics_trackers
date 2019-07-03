@@ -1,6 +1,7 @@
 <% if tracker = Spree::Tracker.current(:google_analytics) %>
   <script>
-    $('select#currency').on('change', function(e) {
+    var selector = document.getElementById('currency');
+    selector.addEventListener("change", function(e) {
       if (typeof ga !== 'undefined') {
         ga('set', 'currencyCode', $(this).val());
       }
