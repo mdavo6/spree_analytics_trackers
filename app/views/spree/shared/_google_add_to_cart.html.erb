@@ -1,9 +1,12 @@
 <script>
   var addToCart = document.getElementById('populate_order');
+  var addToCartButton = document.getElementById('add-to-cart-button');
+  var colourVariantList = document.getElementById('colour-variant-list');
+
   addToCart.addEventListener('ajax:beforeSend', function(e) {
     if ($(this).data('ajaxSubmitted') == true) {
       // Previously submitted, don't submit again
-      return false
+      return false;
     }
     else {
       // Mark it so that the next submit gets ignored
@@ -21,4 +24,17 @@
       return true;
     }
   });
+
+  // colourVariantList will only be present when there are multiple colour options
+  if (typeof(colourVariantList) != 'undefined' && colourVariantList != null) {
+    addToCartButton.addEventListener('click', function(e) {
+      if (! ($('input[type=radio]:checked').size() > 0)) {
+        $('#colour-variant-list').after('<div id="error-msg" class="alert alert-danger">Select a colour</p>');
+        $('#colour-variant-list').on('click', function(e) {
+          $('#error-msg').remove();
+        });
+      }
+    });
+  }
+
 </script>
