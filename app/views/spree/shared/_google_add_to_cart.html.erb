@@ -3,13 +3,15 @@
   var addToCartButton = document.getElementById('add-to-cart-button');
   var colourVariantList = document.getElementById('colour-variant-list');
 
-  addToCart.addEventListener('ajax:beforeSend', function(e) {
+  addToCart.addEventListener('submit', function(e) {
     if ($(this).data('ajaxSubmitted') == true) {
       // Previously submitted, don't submit again
+      e.preventDefault();
       return false;
     }
     else {
       // Mark it so that the next submit gets ignored
+      e.preventDefault();
       $(this).data('ajaxSubmitted', true);
       $(this).find(':submit, :image').removeClass('primary').addClass('disabled');
       if (typeof ga !== 'undefined') {
@@ -22,6 +24,7 @@
         ga('send', 'event', 'UX', 'click', 'add to cart');
       }
       return true;
+      addToCart.submit();
     }
   });
 
