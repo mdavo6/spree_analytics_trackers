@@ -1,7 +1,11 @@
 <%# more info: https://developers.google.com/analytics/devguides/collection/analyticsjs/enhanced-ecommerce %>
 <script>
   if (typeof ga !== 'undefined') {
-    <%= render partial: 'spree/shared/google_add_items', locals: { order: @order } %>
+
+    // Added to prevent double counting of checkouts
+    <% if @order.state == 'cart' %>
+      <%= render partial: 'spree/shared/google_add_items', locals: { order: @order } %>
+    <% end %>
 
     // Add the step number and additional info about the checkout to the action.
     ga('ec:setAction','checkout', {
