@@ -7,7 +7,11 @@
           ga('ec:addProduct',
             <%= product_for_google(product, position: index+1) %>
           );
-          ga('ec:setAction', 'click', { list: '<%= @taxon.name %>'});
+          <% if @taxon %>
+            ga('ec:setAction', 'click', { list: '<%= @taxon.name %>'});
+          <% else %>
+            ga('ec:setAction', 'click', { list: 'products'});
+          <% end %>
           ga('send', 'event', 'UX', 'click', 'Results', {
             hitCallback: function() {
               Turbolinks.visit('<%= product_url(product, taxon_id: @taxon.try(:id)) %>');

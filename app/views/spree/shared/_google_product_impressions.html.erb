@@ -3,7 +3,11 @@
     if (typeof ga !== 'undefined') {
       <% products.each_with_index do |product, index| %>
         ga('ec:addImpression',
-          <%= product_for_google(product, position: index+1, list: @taxon.name) %>
+          <% if @taxon %>
+            <%= product_for_google(product, position: index+1, list: @taxon.name) %>
+          <% else %>
+            <%= product_for_google(product, position: index+1, list: products) %>
+          <% end %>
         );
       <% end %>
     }
