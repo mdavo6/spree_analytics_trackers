@@ -7,14 +7,21 @@
 
     <% if user_analytics_id = try_spree_current_user.try(:analytics_id) %>
       ga('create', { 'trackingId': '<%= tracker.analytics_id %>', 'cookieDomain': 'auto', 'userId': '<%= user_analytics_id %>' });
+
+      <% if try_spree_current_user.wholesaler_or_lead? %>
+        var userType = 'wholesale';
+      <% else %>
+        var userType = 'retail';
+      <% end %>
+      ga('set', 'dimension1', userType);
     <% else %>
       ga('create', '<%= tracker.analytics_id %>', 'auto');
+      ga('set', 'dimension1', 'retail');
     <% end %>
 
     ga('require', 'displayfeatures');
     ga('require', 'ec');
     ga('set', 'currencyCode', '<%= current_currency %>');
-    ga('set', 'dimension1', '<%= try_spree_current_user.wholesaler? %>');
 
   </script>
 <% end %>
