@@ -14,6 +14,7 @@
     ga('require', 'displayfeatures');
     ga('require', 'ec');
     ga('set', 'currencyCode', '<%= current_currency %>');
+    ga('set', 'dimension1', '<%= try_spree_current_user.wholesaler? %>');
 
   </script>
 <% end %>
