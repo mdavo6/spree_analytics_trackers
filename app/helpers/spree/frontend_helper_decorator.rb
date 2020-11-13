@@ -25,6 +25,7 @@ Spree::FrontendHelper.class_eval do
       name: product.name,
       category: product.category.try(:name),
       brand: product.brand.try(:name),
+      dimension2: product.all_skus,
       price: product.price_in(current_currency).amount.to_f
     }.tap do |hash|
     end.merge(optional).to_json.html_safe

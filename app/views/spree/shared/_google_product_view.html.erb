@@ -4,7 +4,10 @@
         ga('ec:addProduct',
           <%= product_for_google(@product) %>
         );
-
+        ga('set','dimension3','product');
+        ga('set','dimension4',
+        '<%= @product.price_in(current_currency).amount.to_s %>'
+      );
         ga('ec:setAction', 'detail');
       }
   </script>
