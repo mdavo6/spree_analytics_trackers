@@ -1,14 +1,43 @@
-<% if tracker = Spree::Tracker.current(:google_analytics) %>
-  <script>
-      if (typeof ga !== 'undefined') {
-        ga('ec:addProduct',
-          <%= product_for_google(@product) %>
-        );
-        ga('set','dimension3','product');
-        ga('set','dimension4',
-        '<%= @product.price_in(current_currency).amount.to_s %>'
-      );
-        ga('ec:setAction', 'detail');
-      }
-  </script>
-<% end %>
+<script>
+  // Measures product impressions and also tracks a standard
+  // pageview for the tag configuration.
+  // Product impressions are sent by pushing an impressions object
+  // containing one or more impressionFieldObjects.
+  dataLayer.push({
+  'ecommerce': {
+    'currencyCode': 'EUR',                       // Local currency is optional.
+    'impressions': [
+     {
+       'name': 'Triblend Android T-Shirt',       // Name or ID is required.
+       'id': '12345',
+       'price': '15.25',
+       'brand': 'Google',
+       'category': 'Apparel',
+       'variant': 'Gray',
+       'list': 'Search Results',
+       'position': 1
+     },
+     {
+       'name': 'Donut Friday Scented T-Shirt',
+       'id': '67890',
+       'price': '33.75',
+       'brand': 'Google',
+       'category': 'Apparel',
+       'variant': 'Black',
+       'list': 'Search Results',
+       'position': 2
+     }]
+  }
+  });
+
+
+    ga('ec:addProduct',
+      <%= product_for_google(@product) %>
+    );
+    ga('set','dimension3','product');
+    ga('set','dimension4',
+    '<%= @product.price_in(current_currency).amount.to_s %>'
+  );
+    ga('ec:setAction', 'detail');
+  }
+</script>

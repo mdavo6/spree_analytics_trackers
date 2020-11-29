@@ -1,16 +1,19 @@
 <% if tracker = Spree::Tracker.current(:google_analytics) %>
   <script>
-    if (typeof ga !== 'undefined') {
-      <% products.each_with_index do |product, index| %>
-        ga('ec:addImpression',
-          <% if @taxon %>
-            <%= product_for_google(product, position: index+1, list: @taxon.name) %>
-          <% else %>
-            <%= product_for_google(product, position: index+1, list: products) %>
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'view_item_list', {
+        "items": [
+          <% products.each_with_index do |product, index| %>
+              <% if @taxon %>
+                <%= product_for_google(product, list_position: index+1, list_name: @taxon.name) %>
+              <% else %>
+                <%= product_for_google(product, list_position: index+1, list_name: products) %>
+              <% end %>
+            );
           <% end %>
-        );
-      <% end %>
+        ]
       ga('set', 'dimension3','category');
+      }
     }
   </script>
 <% end %>
